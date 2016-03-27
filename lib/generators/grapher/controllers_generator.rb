@@ -1,6 +1,9 @@
+require 'rails/generators'
+
 module Grapher
 	module Generators
 		class ControllersGenerator < Rails::Generators::Base
+			CONTROLLERS = %w(graphers).freeze
 			source_root File.expand_path("../../templates/controllers", __FILE__)
 		    argument :scope, required: true,
 		        desc: "The scope to create controllers in"

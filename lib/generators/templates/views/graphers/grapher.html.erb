@@ -1,0 +1,6 @@
+<h2>Test View</h2>
+
+<% @columnNames.each do |c| %>
+<%= @scopeName.columns_hash[c].type %> 
+<% end %>
+<br>

@@ -1,5 +1,6 @@
 require "grapher/version"
+require 'rails'
 
 module Grapher
-  # Your code goes here...
+  # attr_accessor :scope_column_names
 end
