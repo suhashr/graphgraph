@@ -1,5 +1,5 @@
 class <%= @scope_prefix %>GraphgraphsController < ApplicationController
-	def grapher
+	def graphgraph
 		@scopeName= <%= @scope.capitalize %>
 		@testData= <%= @scope.capitalize %>.all
 		@columnNames = <%= @scope.capitalize %>.column_names
