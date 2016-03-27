@@ -1,3 +1,3 @@
-Rails.application.routes.draw do
-	match 'route' => 'grapher/graphers#testMethod'
-end
+# Rails.application.routes.draw do
+# 	match 'route' => 'grapher/graphers#testMethod'
+# end

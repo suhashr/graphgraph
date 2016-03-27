@@ -1,6 +1,6 @@
-require "grapher/version"
+require "graphgraph/version"
 require 'rails'
 
-module Grapher
+module Graphgraph
   # attr_accessor :scope_column_names
 end

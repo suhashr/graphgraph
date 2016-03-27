@@ -1,6 +1,6 @@
 require 'rails/generators'
 
-module Grapher
+module Graphgraph
 	module Generators
 		class ViewsGenerator < Rails::Generators::Base
 			argument :scope, :required => false, :default => nil,
@@ -8,7 +8,7 @@ module Grapher
 			 source_root File.expand_path("../../templates/views", __FILE__)
 
 	      def copy_views
-	        directory "graphers","app/views/#{scope || 'grapher'}/graphers/"
+	        directory "graphgraphs","app/views/#{scope || 'graphgraph'}/graphgraphs/"
 	      end
 		end
 	end

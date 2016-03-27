@@ -1,4 +1,4 @@
-class <%= @scope_prefix %>GraphersController < ApplicationController
+class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 	def grapher
 		@scopeName= <%= @scope.capitalize %>
 		@testData= <%= @scope.capitalize %>.all

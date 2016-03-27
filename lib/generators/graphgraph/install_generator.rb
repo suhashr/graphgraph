@@ -1,9 +1,9 @@
 require 'rails/generators'
 
-module Grapher
+module Graphgraph
 	module Generators
 		class InstallGenerator < Rails::Generators::Base
-			CONTROLLERS = %w(graphers).freeze
+			CONTROLLERS = %w(graphgraphs).freeze
 			source_root File.expand_path("../../templates/", __FILE__)
 		    argument :scope, required: true,
 		        desc: "The scope to create controllers in"
@@ -20,7 +20,7 @@ module Grapher
 		    end
 
 		    def setup_routes
-  				route("get '#{scope}s/grapher' => '#{scope}/graphers#grapher'")
+  				route("get '#{scope}s/graphgraph' => '#{scope}/graphgraphs#graphgraph'")
 			end
 
 		    # def show_readme
@@ -32,7 +32,7 @@ module Grapher
 			 # source_root File.expand_path("../templates/", __FILE__)
 
 	      def copy_views
-	        directory "views/graphers","app/views/#{scope || 'grapher'}/graphers/"
+	        directory "views/graphgraphs","app/views/#{scope || 'graphgraph'}/graphgraphs/"
 	      end
 		end
 	end
