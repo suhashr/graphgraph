@@ -21,6 +21,7 @@ module Graphgraph
 
 		    def setup_routes
   				route("get '#{scope}s/graphgraph' => '#{scope}/graphgraphs#graphgraph'")
+					route("post '#{scope}s/graphgraph' => '#{scope}/graphgraphs#graphgraph'")
 			end
 
 		    # def show_readme
