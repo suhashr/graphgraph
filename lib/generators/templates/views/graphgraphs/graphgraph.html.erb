@@ -1,8 +1,143 @@
-<h2>Test View</h2>
+<%= form_tag :method => 'get' do %>
+ 	<p>
+ 		<lable>Graph Type :</lable>
+		<%= select_tag :graphtype, options_for_select(@graphtype), :id=>"select_graph", :include_blank => true %>
+ 	</p>
+  <p>
+    <lable>Title :</label>
+    <input type="text" name="title" />
+  </p>
+ 	<p>
+    	<lable>X Axis :</lable>
+		<%= select_tag :xaxis, options_for_select(@selectoptions), :id=>"select_xaxis", :include_blank => true, :onchange => "typecheckx()"  %>
+	</p>
 
-<% @columnNames.each do |c| %>
-<%= @scopeName.columns_hash[c].type %> 
+  <div class='col-sm-2' id="datepickerforx" hidden>
+      <input type='text' name="xstart" class="form-control" id='datetimepicker1' />
+      to
+      <input type='text' name="xend" class="form-control" id='datetimepicker2' /></br>
+      <input type="radio" name="rangetypex" value="minute"> per Minute<br>
+      <input type="radio" name="rangetypex" value="hourly" checked> Hourly<br>
+      <input type="radio" name="rangetypex" value="daily"> Daily<br>
+      <input type="radio" name="rangetypex" value="monthly"> Monthly<br>
+  </div>
+
+	<p>
+    	<lable>Y Axis :</lable>
+		<%= select_tag :yaxis, options_for_select(@selectoptions), :id=>"select_yaxis", :include_blank => true, :onchange => "typechecky()"  %>
+	</p>
+
+  <div class='col-sm-2' id="datepickerfory" hidden>
+      <input type='text' name="ystart" class="form-control" id='datetimepicker3' />
+      to
+      <input type='text' name="yend" class="form-control" id='datetimepicker4' />
+  </div>
+
+   	<%= submit_tag 'Submit', :id=>"submitselection"%>
 <% end %>
-<br>
 
-<h3> Test Push</h3>
+<script>
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+    $('#datetimepicker2').datetimepicker({
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#datetimepicker1").on("dp.change", function (e) {
+        $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+    });
+    $("#datetimepicker2").on("dp.change", function (e) {
+        $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+    });
+    $('#datetimepicker3').datetimepicker();
+    $('#datetimepicker4').datetimepicker({
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#datetimepicker3").on("dp.change", function (e) {
+        $('#datetimepicker4').data("DateTimePicker").minDate(e.date);
+    });
+    $("#datetimepicker4").on("dp.change", function (e) {
+        $('#datetimepicker3').data("DateTimePicker").maxDate(e.date);
+    });
+  });
+  function showSource(dividsource) {
+    console.log(dividsource);
+    document.getElementById("sourceArea").value=document.getElementById(dividsource).innerHTML;
+    document.getElementById("sourceArea").style.display="block";
+  }
+  function typecheckx(){
+    if (document.getElementById('select_xaxis').value.indexOf('datetime')!=-1)
+      document.getElementById('datepickerforx').style.display= "inline";
+    else
+      document.getElementById('datepickerforx').style.display= "none";
+  }
+  function typechecky(){
+    if (document.getElementById('select_yaxis').value.indexOf('datetime')!=-1)
+      document.getElementById('datepickerfory').style.display= "inline";
+    else
+      document.getElementById('datepickerfory').style.display= "none";
+  }
+	$(document).ready(function(){
+	    $('#select_xaxis').change(function() {
+	        $('#selectxlabel').text($(this).val());
+	    });
+	    $('#select_yaxis').change(function() {
+	        $('#selectylabel').text($(this).val());
+	    });
+	    $('#select_graph').change(function() {
+	        $('#selectgraphlabel').text($(this).val());
+	    });
+	    $('#select_graph').change(updateFormEnabled);
+	    $('#select_xaxis').change(updateFormEnabled);
+	    $('#select_yaxis').change(updateFormEnabled);
+      $('[data-behaviour~=datepicker]').datepicker();
+	});
+
+	function updateFormEnabled() {
+	    if (verifySettings()) {
+	        $('#submitselection').attr('disabled', false);
+	    } else {
+	        $('#submitselection').attr('disabled', true);
+	    }
+	}
+
+	function verifySettings() {
+	    if ($('#select_graph').val() != '' && $('#select_xaxis').val() != '' && $('#select_yaxis').val() != '') {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+
+	$('#submitselection').attr('disabled', true);
+
+</script>
+
+<br>
+<lable> Current Settings: </lable> <br>
+<lable> Graph Type: </lable>
+<label id="selectgraphlabel"> <%= params[:graphtype] %> </label>
+<br>
+<lable> X-Axis: </lable>
+<label id="selectxlabel"> <%= params[:xaxis] %> </label>
+<br>
+<lable> Y-Axis: </lable>
+<label id="selectylabel"> <%= params[:yaxis] %> </label>
+<br>
+<% if (params[:graphtype]=="Bar Graph") %>
+    <%= high_chart("my_bar_div", @chartbar) %>
+    <button onclick="showSource('my_bar_div')">Show Source</button>
+   <% end %>
+<% if (params[:graphtype]=="Line Graph") %>
+    <%= high_chart("my_line_div", @chartline) %>
+    <button onclick="showSource('my_line_div')">Show Source</button>
+<% end %>
+<% if (params[:graphtype]=="Area Graph") %>
+    <%= high_chart("my_area_div", @chartarea) %>
+    <button onclick="showSource('my_area_div')">Show Source</button>
+<% end %>
+<% if (params[:graphtype]=="Scatter Graph") %>
+    <%= high_chart("my_scatter_div", @chartscatter) %>
+    <button onclick="showSource('my_scatter_div')">Show Source</button>
+<% end %>
+
+<textarea id="sourceArea" style="width: 900px; height: 300px;" hidden></textarea>

@@ -25,6 +25,12 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "bootstrap-sass", "~> 3.3.6"
   spec.add_development_dependency "lazy_high_charts", ">=1.0.0"
+  spec.add_development_dependency 'momentjs-rails', '>= 2.9.0'
+  spec.add_development_dependency 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+  spec.add_runtime_dependency "bootstrap-sass", "~> 3.3.6"
   spec.add_runtime_dependency "lazy_high_charts", ">=1.0.0"
+  spec.add_runtime_dependency 'momentjs-rails', ">= 2.9.0"
+  spec.add_runtime_dependency 'bootstrap3-datetimepicker-rails', "~> 4.17.42"
 end
