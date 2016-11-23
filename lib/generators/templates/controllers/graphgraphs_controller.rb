@@ -217,8 +217,7 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 	end
 
 	def set_user_template
-		current_model_path=<%= @scope.capitalize %>.to_s.downcase+"s"
-		@foruser="<%= form_tag(\"/#{current_model_path}/graphgraph\", method: \"get\") do %>
+		@foruser="<%= form_tag(\"/replace_with_current_model/graphgraph\", method: \"get\") do %>
 		<input type=\"text\" name=\"graphtype\" id=\"graphtype\" value=\"#{params[:graphtype]}\" hidden>
 		<input type=\"text\" name=\"yaxis\" id=\"yaxis\" value=\"#{params[:yaxis]}\" hidden>
 		<input type=\"text\" name=\"xaxis\" id=\"xaxis\" value=\"#{params[:xaxis]}\" hidden>
