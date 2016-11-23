@@ -4,7 +4,7 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 		@scopeName= <%= @scope.capitalize %>
 		@testData= <%= @scope.capitalize %>.all
 		@columnNames = <%= @scope.capitalize %>.column_names
-		@columnHash = %= @scope.capitalize %>.columns_hash.each {|k,v| puts "#{k} => #{v.type}"}
+		@columnHash = <%= @scope.capitalize %>.columns_hash.each {|k,v| puts "#{k} => #{v.type}"}
 		@selectoptions =[]
 		@columnNames.each do 	|c|
 			@selectoptions << c.to_s + " : " + @columnHash[c].type.to_s
@@ -28,7 +28,8 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 			set_areagraph
 			set_scattergraph
 			@mainchart=@chartline||@chartbar||@chartarea||@chartscatter
-			redirect_to <%= @scope.capitalize %>s_path(options: @mainchart.objects.to_s, placeholder: @mainchart.placeholder.to_s, series_data: @mainchart.series_data.to_s)
+			#comment out below line and enter the user page path
+			# redirect_to replace_with_user_page_path(options: @mainchart.objects.to_s, placeholder: @mainchart.placeholder.to_s, series_data: @mainchart.series_data.to_s)
 		end
 	end
 
@@ -217,8 +218,8 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 	end
 
 	def set_user_template
-		current_model_path=<%= @scope.capitalize %>.to_s.downcase + "s"
-		@foruserencode="&lt;%= form_tag(\"/#{current_model_path}/graphgraph\", method: \"get\") do %&gt;
+		#relplace the "replace_with_current_model" with your model name in plural
+		@foruserencode="&lt;%= form_tag(\"/replace_with_current_model/graphgraph\", method: \"get\") do %&gt;
 		&lt;input type=\"text\" name=\"graphtype\" id=\"graphtype\" value=\"#{params[:graphtype]}\" hidden&gt;
 		&lt;input type=\"text\" name=\"yaxis\" id=\"yaxis\" value=\"#{params[:yaxis]}\" hidden&gt;
 		&lt;input type=\"text\" name=\"xaxis\" id=\"xaxis\" value=\"#{params[:xaxis]}\" hidden&gt;
@@ -273,7 +274,8 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 			    &lt;%= high_chart(\"my_scatter_div\", newchart) %&gt;
 			&lt;% end %&gt;
 		&lt;% end %&gt;"
-		# @foruser=CGI.unescapeHTML(@foruserencode) comment out after install
+		# comment out the below line after install
+		# @foruser=CGI.unescapeHTML(@foruserencode)
 	end
 
 	def get_counts(dateValue,pluckValue,startvalue,endvalue)
