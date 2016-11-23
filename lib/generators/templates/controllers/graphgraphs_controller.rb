@@ -217,7 +217,8 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 	end
 
 	def set_user_template
-		@foruser="<%= form_tag(\"/replace_with_current_model/graphgraph\", method: \"get\") do %>
+		current_model_path=<%= @scope.capitalize %>.to_s.downcase + "s"
+		@foruserencode=CGI.escapeHTML("<%= form_tag(\"/#{current_model_path}/graphgraph\", method: \"get\") do %>
 		<input type=\"text\" name=\"graphtype\" id=\"graphtype\" value=\"#{params[:graphtype]}\" hidden>
 		<input type=\"text\" name=\"yaxis\" id=\"yaxis\" value=\"#{params[:yaxis]}\" hidden>
 		<input type=\"text\" name=\"xaxis\" id=\"xaxis\" value=\"#{params[:xaxis]}\" hidden>
@@ -271,7 +272,8 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 			<% if (\"#{params[:graphtype]}\"==\"Scatter Graph\") %>
 			    <%= high_chart(\"my_scatter_div\", newchart) %>
 			<% end %>
-		<% end %>"
+		<% end %>")
+		@foruser=CGI.unescapeHTML(@foruserencode)
 	end
 
 	def get_counts(dateValue,pluckValue,startvalue,endvalue)
