@@ -273,7 +273,7 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 			    <%= high_chart(\"my_scatter_div\", newchart) %>
 			<% end %>
 		<% end %>")
-		@foruser=CGI.unescapeHTML(@foruserencode)
+		# @foruser=CGI.unescapeHTML(@foruserencode) comment out after install
 	end
 
 	def get_counts(dateValue,pluckValue,startvalue,endvalue)
