@@ -218,24 +218,24 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 
 	def set_user_template
 		current_model_path=<%= @scope.capitalize %>.to_s.downcase + "s"
-		@foruserencode=CGI.escapeHTML("<%= form_tag(\"/#{current_model_path}/graphgraph\", method: \"get\") do %>
-		<input type=\"text\" name=\"graphtype\" id=\"graphtype\" value=\"#{params[:graphtype]}\" hidden>
-		<input type=\"text\" name=\"yaxis\" id=\"yaxis\" value=\"#{params[:yaxis]}\" hidden>
-		<input type=\"text\" name=\"xaxis\" id=\"xaxis\" value=\"#{params[:xaxis]}\" hidden>
-		<input type=\"text\" name=\"fromuser\" id=\"fromuser\" value=\"fromuser\" hidden>
+		@foruserencode="&lt;%= form_tag(\"/#{current_model_path}/graphgraph\", method: \"get\") do %&gt;
+		&lt;input type=\"text\" name=\"graphtype\" id=\"graphtype\" value=\"#{params[:graphtype]}\" hidden&gt;
+		&lt;input type=\"text\" name=\"yaxis\" id=\"yaxis\" value=\"#{params[:yaxis]}\" hidden&gt;
+		&lt;input type=\"text\" name=\"xaxis\" id=\"xaxis\" value=\"#{params[:xaxis]}\" hidden&gt;
+		&lt;input type=\"text\" name=\"fromuser\" id=\"fromuser\" value=\"fromuser\" hidden&gt;
 
-	  <div class='col-sm-2' id=\"datepickerforxview\" hidden>
-	      <input type='text' name=\"xstart\" class=\"form-control\" id='datetimepicker1view' />
+	  &lt;div class='col-sm-2' id=\"datepickerforxview\" hidden&gt;
+	      &lt;input type='text' name=\"xstart\" class=\"form-control\" id='datetimepicker1view' /&gt;
 	      to
-	      <input type='text' name=\"xend\" class=\"form-control\" id='datetimepicker2view' /></br>
-	      <input type=\"radio\" name=\"rangetypex\" value=\"minute\"> per Minute<br>
-	      <input type=\"radio\" name=\"rangetypex\" value=\"hourly\" checked> Hourly<br>
-	      <input type=\"radio\" name=\"rangetypex\" value=\"daily\"> Daily<br>
-	      <input type=\"radio\" name=\"rangetypex\" value=\"monthly\"> Monthly<br>
-	  </div>
-		<%= submit_tag 'Generate Graph', :id=>\"submitselection\"%>
-		<% end %>
-		<script>
+	      &lt;input type='text' name=\"xend\" class=\"form-control\" id='datetimepicker2view' /&gt;&lt;/br&gt;
+	      &lt;input type=\"radio\" name=\"rangetypex\" value=\"minute\"&gt; per Minute&lt;br&gt;
+	      &lt;input type=\"radio\" name=\"rangetypex\" value=\"hourly\" checked&gt; Hourly&lt;br&gt;
+	      &lt;input type=\"radio\" name=\"rangetypex\" value=\"daily\"&gt; Daily&lt;br&gt;
+	      &lt;input type=\"radio\" name=\"rangetypex\" value=\"monthly\"&gt; Monthly&lt;br&gt;
+	  &lt;/div&gt;
+		&lt;%= submit_tag 'Generate Graph', :id=&gt;\"submitselection\"%&gt;
+		&lt;% end %&gt;
+		&lt;script&gt;
 		  $(function () {
 		    $('#datetimepicker1view').datetimepicker();
 		    $('#datetimepicker2view').datetimepicker({
@@ -254,25 +254,25 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
         else
           document.getElementById('datepickerforxview').style.display= \"none\";
       });
-		</script>
-		<% if params[:options]!=nil %>
-			<% newchart=LazyHighCharts::HighChart.new() %>
-			<% newchart.options=eval(params[:options]) %>
-			<% newchart.placeholder=params[:placeholder] %>
-			<% newchart.series_data=eval(params[:series_data]) %>
-			<% if (\"#{params[:graphtype]}\"==\"Bar Graph\") %>
-			    <%= high_chart(\"my_bar_div\", newchart) %>
-			   <% end %>
-			<% if (\"#{params[:graphtype]}\"==\"Line Graph\") %>
-			    <%= high_chart(\"my_line_div\", newchart) %>
-			<% end %>
-			<% if (\"#{params[:graphtype]}\"==\"Area Graph\") %>
-			    <%= high_chart(\"my_area_div\", newchart) %>
-			<% end %>
-			<% if (\"#{params[:graphtype]}\"==\"Scatter Graph\") %>
-			    <%= high_chart(\"my_scatter_div\", newchart) %>
-			<% end %>
-		<% end %>")
+		&lt;/script&gt;
+		&lt;% if params[:options]!=nil %&gt;
+			&lt;% newchart=LazyHighCharts::HighChart.new() %&gt;
+			&lt;% newchart.options=eval(params[:options]) %&gt;
+			&lt;% newchart.placeholder=params[:placeholder] %&gt;
+			&lt;% newchart.series_data=eval(params[:series_data]) %&gt;
+			&lt;% if (\"#{params[:graphtype]}\"==\"Bar Graph\") %&gt;
+			    &lt;%= high_chart(\"my_bar_div\", newchart) %&gt;
+			   &lt;% end %&gt;
+			&lt;% if (\"#{params[:graphtype]}\"==\"Line Graph\") %&gt;
+			    &lt;%= high_chart(\"my_line_div\", newchart) %&gt;
+			&lt;% end %&gt;
+			&lt;% if (\"#{params[:graphtype]}\"==\"Area Graph\") %&gt;
+			    &lt;%= high_chart(\"my_area_div\", newchart) %&gt;
+			&lt;% end %&gt;
+			&lt;% if (\"#{params[:graphtype]}\"==\"Scatter Graph\") %&gt;
+			    &lt;%= high_chart(\"my_scatter_div\", newchart) %&gt;
+			&lt;% end %&gt;
+		&lt;% end %&gt;"
 		# @foruser=CGI.unescapeHTML(@foruserencode) comment out after install
 	end
 
