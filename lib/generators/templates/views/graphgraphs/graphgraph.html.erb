@@ -59,9 +59,7 @@
         $('#datetimepicker3').data("DateTimePicker").maxDate(e.date);
     });
   });
-  function showSource(dividsource) {
-    console.log(dividsource);
-    document.getElementById("sourceArea").value=document.getElementById(dividsource).innerHTML;
+  function showSource() {
     document.getElementById("sourceArea").style.display="block";
   }
   function typecheckx(){
@@ -125,19 +123,19 @@
 <br>
 <% if (params[:graphtype]=="Bar Graph") %>
     <%= high_chart("my_bar_div", @chartbar) %>
-    <button onclick="showSource('my_bar_div')">Show Source</button>
+    <button onclick="showSource()">Show Source</button>
    <% end %>
 <% if (params[:graphtype]=="Line Graph") %>
     <%= high_chart("my_line_div", @chartline) %>
-    <button onclick="showSource('my_line_div')">Show Source</button>
+    <button onclick="showSource()">Show Source</button>
 <% end %>
 <% if (params[:graphtype]=="Area Graph") %>
     <%= high_chart("my_area_div", @chartarea) %>
-    <button onclick="showSource('my_area_div')">Show Source</button>
+    <button onclick="showSource()">Show Source</button>
 <% end %>
 <% if (params[:graphtype]=="Scatter Graph") %>
     <%= high_chart("my_scatter_div", @chartscatter) %>
-    <button onclick="showSource('my_scatter_div')">Show Source</button>
+    <button onclick="showSource()">Show Source</button>
 <% end %>
 
-<textarea id="sourceArea" style="width: 900px; height: 300px;" hidden></textarea>
+<textarea id="sourceArea" style="width: 900px; height: 300px;" hidden><%= @foruser.html_safe %></textarea>
