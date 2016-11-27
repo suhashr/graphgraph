@@ -28,8 +28,11 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
 			set_areagraph
 			set_scattergraph
 			@mainchart=@chartline||@chartbar||@chartarea||@chartscatter
+			session[:options]=@mainchart.objects.to_s
+			session[:placeholder]=@mainchart.placeholder.to_s
+			session[:series_data]=@mainchart.series_data.to_s
 			#comment out below line and enter the user page path
-			# redirect_to replace_with_user_page_path(options: @mainchart.objects.to_s, placeholder: @mainchart.placeholder.to_s, series_data: @mainchart.series_data.to_s)
+			# redirect_to replace_with_user_page_path
 		end
 	end
 
@@ -256,11 +259,11 @@ class <%= @scope_prefix %>GraphgraphsController < ApplicationController
           document.getElementById('datepickerforxview').style.display= \"none\";
       });
 		&lt;/script&gt;
-		&lt;% if params[:options]!=nil %&gt;
+		&lt;% if session[:options]!=nil %&gt;
 			&lt;% newchart=LazyHighCharts::HighChart.new() %&gt;
-			&lt;% newchart.options=eval(params[:options]) %&gt;
-			&lt;% newchart.placeholder=params[:placeholder] %&gt;
-			&lt;% newchart.series_data=eval(params[:series_data]) %&gt;
+			&lt;% newchart.options=eval(session[:options]) %&gt;
+			&lt;% newchart.placeholder=session[:placeholder] %&gt;
+			&lt;% newchart.series_data=eval(session[:series_data]) %&gt;
 			&lt;% if (\"#{params[:graphtype]}\"==\"Bar Graph\") %&gt;
 			    &lt;%= high_chart(\"my_bar_div\", newchart) %&gt;
 			   &lt;% end %&gt;
